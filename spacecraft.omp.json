@@ -5,6 +5,15 @@
       "alignment": "left",
       "segments": [
         {
+          "foreground": "#cccccc",
+          "properties": {
+            "windows": "\ue70f"
+          },
+          "style": "plain",
+          "template": " {{ .Icon }} ",
+          "type": "os"
+        },
+        {
           "foreground": "lightYellow",
           "style": "plain",
           "template": "{{ .UserName }} ",
