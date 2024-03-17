@@ -1,8 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "final_space": true,
+  "version": 2,
   "palettes": {
+    "template": "Sublette",
     "list": {
       "Sublette": {
+        "spc-background": "#202535",
+        "spc-badge-background": "#414962",
         "spc-black": "#202535",
         "spc-lightblack": "#202535",
         "spc-brightblack": "#405570",
@@ -16,17 +21,20 @@
         "spc-term-green2": "#49ff6d",
         "spc-term-green3": "#16a085",
         "spc-term-green4": "#205c57",
+        "spc-magenta": "#f7c",
         "spc-orange" : "#e57c46",
         "spc-red": "#e57",
         "spc-brightred" : "#e65",
-        "spc-silver" : "#cccccc"
+        "spc-silver" : "#d9d9d9",
+        "spc-yellow" : "#fd8",
+        "spc-brightyellow" : "#ff7"
       }
-    },
-    "template": "Sublette"
+    }
   },
   "blocks": [
     {
       "alignment": "left",
+      "newline": true,
       "segments": [
         {
           "foreground": "p:spc-silver",
@@ -55,19 +63,20 @@
         {
           "type": "git",
           "templates": [
-            "<p:spc-silver,p:spc-orange><b> \uf1d3 :</b></>",
-            "{{.HEAD}}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
+            "<p:spc-silver,p:spc-badge-background><b> \uf1d3 </b></><p:spc-badge-background,p:spc-background>\ue0b0</></>",
+            "",
+            "{{.HEAD}}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}",
+            ""
           ],
           "style": "plain",
           "properties": {
-            "branch_icon": " <b>\ue725</b> ",
+            "branch_icon": " <p:spc-magenta><b>\ue725 </b></>",
             "fetch_bare_info": true,
             "fetch_status": true,
             "fetch_upstream_icon": true,
             "fetch_stash_count": true
           },
-          "foreground": "p:spc-term-green",
-          "background": "p:spc-lightblack"
+          "foreground": "p:spc-magenta"
         }
       ],
       "type": "prompt"
@@ -85,7 +94,5 @@
       ],
       "type": "prompt"
     }
-  ],
-  "final_space": true,
-  "version": 2
+  ]
 }
