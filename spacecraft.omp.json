@@ -62,21 +62,25 @@
         {
           "type": "git",
           "templates": [
-            "<p:spc-silver,p:spc-badge-background><b> \uf1d3 </b></><p:spc-badge-background,p:spc-background>\ue0b0</></>",
+            "<p:spc-silver,p:spc-badge-background><b> \uf1d3 </b></><p:spc-badge-background,p:spc-background>\ue0b0 </></>",
+            "{{.HEAD}} ",
             "",
-            "{{.HEAD}}",
-            "{{ .UpstreamIcon }}",
-            " [",
+            "[ ",
+            "{{ .String }}",
+            "{{ if gt .Modified 0 }}<p:spc-brightyellow>M {{ .Modifief }}</>{{end}}",
+            "{{ if gt .Untracked 0 }}<p:spc-red>U {{ .Untracked }}</>{{end}}",
             "{{ if gt .StashCount 0 }}\ue257 {{ .StashCount }}{{end}}",
-            "]"
+            " ] ",
+            "{{ if .UpstreamIcon }}<p:spc-silver><b>\uebcb </b></> {{.UpstreamIcon}} {{.BranchStatus}}{{end}}"
           ],
           "style": "plain",
           "properties": {
-            "branch_icon": " <p:spc-magenta><b>\ue725 </b></>",
+            "branch_icon": "<b>\ue725 </b>",
             "fetch_bare_info": true,
             "fetch_status": true,
             "fetch_upstream_icon": true,
-            "fetch_stash_count": true
+            "fetch_stash_count": true,
+            "github_icon": "\ueb00"
           },
           "foreground": "p:spc-magenta"
         }
@@ -84,6 +88,7 @@
       "type": "prompt"
     },
     {
+      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
@@ -93,8 +98,7 @@
           "template": "\u276f",
           "type": "text"
         }
-      ],
-      "type": "prompt"
+      ]
     }
   ]
 }
