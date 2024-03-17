@@ -1,11 +1,25 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palettes": {
+    "list": {
+      "Sublette": {
+        "spc-silver" : "#cccccc",
+        "spc-term-green": "#93ff91",
+        "spc-term-green2": "#49ff6d",
+        "spc-term-green3": "#16a085",
+        "spc-term-green4": "#205c57",
+        "spc-red": "#e57",
+        "spc-brightred" : "#e65"
+      }
+    },
+    "template": "Sublette"
+  },
   "blocks": [
     {
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#cccccc",
+          "foreground": "p:spc-silver",
           "properties": {
             "windows": "\ue70f"
           },
@@ -25,13 +39,15 @@
             "style": "folder"
           },
           "style": "plain",
-          "template": "<#ffffff>in</> {{ .Path }} ",
+          "template": "<p:spc-silver>in \uf07c :</> {{ .Path }} ",
           "type": "path"
         },
         {
           "foreground": "#ff94df",
           "properties": {
             "branch_icon": " <#ff94df><b>\ue0a0 </b></>",
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
             "fetch_stash_count": true
           },
           "style": "plain",
