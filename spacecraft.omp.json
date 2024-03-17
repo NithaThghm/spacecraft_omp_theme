@@ -37,28 +37,27 @@
       "newline": true,
       "segments": [
         {
-          "foreground": "p:spc-silver",
+          "type": "os",
+          "template": "<p:spc-silver,p:spc-badge-background><b> {{ .Icon }} </b></><p:spc-badge-background,p:spc-background>\ue0b0 </>",
+          "style": "plain",
           "properties": {
             "windows": "\ue70f"
-          },
-          "style": "plain",
-          "template": " {{ .Icon }} ",
-          "type": "os"
+          }
         },
         {
-          "foreground": "lightYellow",
-          "style": "plain",
+          "type": "session",
           "template": "{{ .UserName }} ",
-          "type": "session"
+          "style": "plain",
+          "foreground": "p:spc-yellow"
         },
         {
           "type": "path",
-          "template": "<p:spc-silver><p:spc-blue> \uf07c </>:</> {{ .Path }} ",
+          "template": "<p:spc-silver,p:spc-badge-background><b> \uf07c </b></><p:spc-badge-background,p:spc-background>\ue0b0 </>{{ .Path }} ",
           "style": "plain",
           "properties": {
             "style": "folder"
           },
-          "foreground": "p:spc-term-green2"
+          "foreground": "p:spc-lightblue"
         },
         {
           "type": "git",
