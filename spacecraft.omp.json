@@ -64,8 +64,11 @@
           "templates": [
             "<p:spc-silver,p:spc-badge-background><b> \uf1d3 </b></><p:spc-badge-background,p:spc-background>\ue0b0</></>",
             "",
-            "{{.HEAD}}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}",
-            ""
+            "{{.HEAD}}",
+            "{{ .UpstreamIcon }}",
+            " [",
+            "{{ if gt .StashCount 0 }}\ue257 {{ .StashCount }}{{end}}",
+            "]"
           ],
           "style": "plain",
           "properties": {
