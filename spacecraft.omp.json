@@ -6,15 +6,20 @@
         "spc-black": "#202535",
         "spc-lightblack": "#202535",
         "spc-brightblack": "#405570",
-        "spc-silver" : "#cccccc",
+        "spc-blue": "#58f",
+        "spc-darkerblue": "#0E62C2",
+        "spc-lightblue": "#7bf",
+        "spc-cyan": "#4ee",
+        "spc-brightcyan": "#5fb",
         "spc-green" :"#5e7",
-        "spc-orange" : "#e57c46",
         "spc-term-green": "#93ff91",
         "spc-term-green2": "#49ff6d",
         "spc-term-green3": "#16a085",
         "spc-term-green4": "#205c57",
+        "spc-orange" : "#e57c46",
         "spc-red": "#e57",
-        "spc-brightred" : "#e65"
+        "spc-brightred" : "#e65",
+        "spc-silver" : "#cccccc"
       }
     },
     "template": "Sublette"
@@ -39,13 +44,13 @@
           "type": "session"
         },
         {
-          "foreground": "cyan",
+          "type": "path",
+          "template": "<p:spc-silver><p:spc-blue> \uf07c </>:</> {{ .Path }} ",
+          "style": "plain",
           "properties": {
             "style": "folder"
           },
-          "style": "plain",
-          "template": "<p:spc-silver>in \uf07c :</> {{ .Path }} ",
-          "type": "path"
+          "foreground": "p:spc-term-green2"
         },
         {
           "type": "git",
