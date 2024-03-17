@@ -3,7 +3,12 @@
   "palettes": {
     "list": {
       "Sublette": {
+        "spc-black": "#202535",
+        "spc-lightblack": "#202535",
+        "spc-brightblack": "#405570",
         "spc-silver" : "#cccccc",
+        "spc-green" :"#5e7",
+        "spc-orange" : "#e57c46",
         "spc-term-green": "#93ff91",
         "spc-term-green2": "#49ff6d",
         "spc-term-green3": "#16a085",
@@ -43,16 +48,21 @@
           "type": "path"
         },
         {
-          "foreground": "#ff94df",
+          "type": "git",
+          "templates": [
+            "<p:spc-silver,p:spc-orange><b> \uf1d3 :</b></>",
+            "{{.HEAD}}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}"
+          ],
+          "style": "plain",
           "properties": {
-            "branch_icon": " <#ff94df><b>\ue0a0 </b></>",
+            "branch_icon": " <b>\ue725</b> ",
+            "fetch_bare_info": true,
             "fetch_status": true,
             "fetch_upstream_icon": true,
             "fetch_stash_count": true
           },
-          "style": "plain",
-          "template": "<#ffffff>on</> {{ .HEAD }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
-          "type": "git"
+          "foreground": "p:spc-term-green",
+          "background": "p:spc-lightblack"
         }
       ],
       "type": "prompt"
