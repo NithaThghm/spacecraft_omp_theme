@@ -22,14 +22,21 @@
         "spc-term-green3": "#16a085",
         "spc-term-green4": "#205c57",
         "spc-magenta": "#f7c",
+        "spc-magenta2": "#FF78B4",
         "spc-orange" : "#e57c46",
+        "spc-orange2": "#F78E69",
         "spc-red": "#e57",
+        "spc-red2": "#CA1551",
         "spc-brightred" : "#e65",
         "spc-silver" : "#d9d9d9",
         "spc-yellow" : "#fd8",
         "spc-brightyellow" : "#ff7"
       }
     }
+  },
+  "var": {
+    "trailing_badge": "<p:spc-badge-background,p:spc-background>\ue0b0 </>",
+    "badge_separator": "<p:spc-yellow>\uf0da</>"
   },
   "blocks": [
     {
@@ -38,39 +45,64 @@
       "segments": [
         {
           "type": "os",
-          "template": "<p:spc-silver,p:spc-badge-background><b> {{ .Icon }} </b></><p:spc-badge-background,p:spc-background>\ue0b0 </>",
+          "templates": [
+            "<b> {{ .Icon }}</b> {{ .Var.badge_separator }}",
+            "<b> {{ .Icon }}</b> {{ .Var.trailing_badge }}"
+          ],
+          "templates_logic": "first_match",
           "style": "plain",
           "properties": {
             "windows": "\ue70f"
-          }
+          },
+          "foreground": "p:spc-silver",
+          "background": "p:spc-badge-background"
         },
         {
-          "type": "session",
-          "template": "{{ .UserName }} ",
+          "type": "",
+          "templates": [
+            "{{ .UserName }} "
+          ],
+          "templates_logic": "first_match",
           "style": "plain",
-          "foreground": "p:spc-yellow"
+          "foreground": "p:spc-yellow",
+          "background": "p:spc-background"
         },
         {
           "type": "path",
-          "template": "<p:spc-silver,p:spc-badge-background><b> \uf07c </b></><p:spc-badge-background,p:spc-background>\ue0b0 </>{{ .Path }} ",
+          "template": "<b> \uf07c</b> {{ .Var.trailing_badge }}",
+          "style": "plain",
+          "foreground": "p:spc-silver",
+          "background": "p:spc-badge-background"
+        },
+        {
+          "type": "path",
+          "templates": [
+            "{{ .Path }} "
+          ],
           "style": "plain",
           "properties": {
             "style": "folder"
           },
-          "foreground": "p:spc-lightblue"
+          "foreground": "p:spc-lightblue",
+          "background": "p:spc-badge-bac"
+        },
+        {
+          "type": "git",
+          "template": "<b> \uf1d3</b> {{ .Var.trailing_badge }}",
+          "style": "plain",
+          "foreground": "p:spc-silver",
+          "background": "p:spc-badge-background"
         },
         {
           "type": "git",
           "templates": [
-            "<p:spc-silver,p:spc-badge-background><b> \uf1d3 </b></><p:spc-badge-background,p:spc-background>\ue0b0 </></>",
             "{{.HEAD}} ",
             "",
-            "[ ",
-            "{{ .String }}",
+            "[",
             "{{ if gt .Modified 0 }}<p:spc-brightyellow>M {{ .Modifief }}</>{{end}}",
             "{{ if gt .Untracked 0 }}<p:spc-red>U {{ .Untracked }}</>{{end}}",
             "{{ if gt .StashCount 0 }}\ue257 {{ .StashCount }}{{end}}",
-            " ] ",
+            "] ",
             "{{ if .UpstreamIcon }}<p:spc-silver><b>\uebcb </b></> {{.UpstreamIcon}} {{.BranchStatus}}{{end}}"
           ],
           "style": "plain",
@@ -82,7 +114,7 @@
             "fetch_stash_count": true,
             "github_icon": "\ueb00"
           },
-          "foreground": "p:spc-magenta"
+          "foreground": "p:spc-magenta2"
         }
       ],
       "type": "prompt"
