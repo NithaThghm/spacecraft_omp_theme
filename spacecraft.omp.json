@@ -7,7 +7,8 @@
     "list": {
       "Sublette": {
         "spc-background": "#202535",
-        "spc-badge-background": "#414962",
+        "spc-badge-background": "transparent",
+        "spc-badge-background2": "#414962",
         "spc-black": "#202535",
         "spc-lightblack": "#202535",
         "spc-brightblack": "#405570",
@@ -35,8 +36,10 @@
     }
   },
   "var": {
+    "leading_badge": "<p:spc-badge-background,p:spc-background>\ue0b0 </>",
     "trailing_badge": "<p:spc-badge-background,p:spc-background>\ue0b0 </>",
-    "badge_separator": "<p:spc-yellow>\uf0da</>"
+    "badge_separator": "<p:spc-yellow>\u00bb</>",
+    "badge_separator2": "<p:spc-yellow>\uf0da</>"
   },
   "blocks": [
     {
@@ -46,7 +49,7 @@
         {
           "type": "os",
           "templates": [
-            "<b> {{ .Icon }}</b> {{ .Var.badge_separator }}",
+            "<b> {{ .Icon }}</b> {{ .Var.badge_separator }} ",
             "<b> {{ .Icon }}</b> {{ .Var.trailing_badge }}"
           ],
           "templates_logic": "first_match",
@@ -69,7 +72,10 @@
         },
         {
           "type": "path",
-          "template": "<b> \uf07c</b> {{ .Var.trailing_badge }}",
+          "templates": [
+            "{{ if .Segments.Git.HEAD }}<p:spc-green>\uf1d3 </>{{ else }}<p:spc-red>\uf1d3 </>{{ end }}",
+            "<b>\uf07c </b>{{ .Var.badge_separator }} "
+          ],
           "style": "plain",
           "foreground": "p:spc-silver",
           "background": "p:spc-badge-background"
@@ -81,15 +87,29 @@
           ],
           "style": "plain",
           "properties": {
-            "style": "folder"
+            "style": "agnoster_short",
+            "folder_separator_icon": "/",
+            "hide_root_location": true
           },
           "foreground": "p:spc-lightblue",
           "background": "p:spc-badge-bac"
         },
         {
           "type": "git",
-          "template": "<b> \uf1d3</b> {{ .Var.trailing_badge }}",
+          "templates": [
+            "{{ .Var.badge_separator }} ",
+            "{{ .BranchStatus }} ",
+            "{{ .UpstreamIcon }}  "
+          ],
           "style": "plain",
+          "properties": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "branch_identical_icon": "<p:spc-green>\u2261</>",
+            "branch_ahead_icon": "<p:spc-red>\u2191</>",
+            "branch_behind_icon": "<p:spc-red>\u2193</>",
+            "branch_gone_icon": "<p:spc-red>\uf4ad </>"
+          },
           "foreground": "p:spc-silver",
           "background": "p:spc-badge-background"
         },
@@ -99,11 +119,9 @@
             "{{.HEAD}} ",
             "",
             "[",
-            "{{ if gt .Modified 0 }}<p:spc-brightyellow>M {{ .Modifief }}</>{{end}}",
-            "{{ if gt .Untracked 0 }}<p:spc-red>U {{ .Untracked }}</>{{end}}",
-            "{{ if gt .StashCount 0 }}\ue257 {{ .StashCount }}{{end}}",
-            "] ",
-            "{{ if .UpstreamIcon }}<p:spc-silver><b>\uebcb </b></> {{.UpstreamIcon}} {{.BranchStatus}}{{end}}"
+            "{{ .Working }}",
+            "{{ if gt .StashCount 0 }} · \ue257 {{ .StashCount }}{{end}}",
+            "] "
           ],
           "style": "plain",
           "properties": {
@@ -121,14 +139,43 @@
     },
     {
       "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "time",
+          "properties": {
+            "time_format": "15:04"
+          }
+        },
+        {
+          "style": "plain",
+          "type": "executiontime",
+          "template": "<p:spc-yellow>\uf0e7</> {{ .FormattedMs }}",
+          "properties": {
+            "style": "austin",
+            "always_enabled": true
+          }
+        },
+        {
+          "type": "shell",
+          "properties": {
+            "mapped_shell_names": {
+              "bash" : "· \uebca"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
       "alignment": "left",
       "newline": true,
       "segments": [
         {
-          "foreground": "lightGreen",
+          "type": "text",
           "style": "plain",
-          "template": "\u276f",
-          "type": "text"
+          "template": "\ueab6",
+          "foreground": "p:spc-green"
         }
       ]
     }
